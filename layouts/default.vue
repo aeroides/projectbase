@@ -2,7 +2,7 @@
   <el-container>
   <el-header><header-view></header-view></el-header>
   <el-container>
-    <el-aside width="15%"><menu-view></menu-view></el-aside>
+    <el-aside width="20%"><menu-view></menu-view></el-aside>
     <el-main><nuxt /></el-main>
   </el-container>
 </el-container>

@@ -103,6 +103,7 @@ export default {
   mounted () {
     this.getCmonth()
     this.getData()
+    console.log(this.$store.state.authUser)
   },
   computed: {
     labName: function () {
