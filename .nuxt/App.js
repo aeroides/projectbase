@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '../node_modules/element-ui/lib/theme-chalk/index.css'
+import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
 
 
 let layouts = {
 
-  "_default": () => import('../layouts/default.vue'  /* webpackChunkName: "layouts/default" */).then(m => m.default || m),
+  "_default": () => import('..\\layouts\\default.vue'  /* webpackChunkName: "layouts_default" */).then(m => m.default || m),
 
-  "_header": () => import('../layouts/header.vue'  /* webpackChunkName: "layouts/header" */).then(m => m.default || m),
+  "_header": () => import('..\\layouts\\header.vue'  /* webpackChunkName: "layouts_header" */).then(m => m.default || m),
 
-  "_login": () => import('../layouts/login.vue'  /* webpackChunkName: "layouts/login" */).then(m => m.default || m),
+  "_login": () => import('..\\layouts\\login.vue'  /* webpackChunkName: "layouts_login" */).then(m => m.default || m),
 
-  "_menu": () => import('../layouts/menu.vue'  /* webpackChunkName: "layouts/menu" */).then(m => m.default || m)
+  "_menu": () => import('..\\layouts\\menu.vue'  /* webpackChunkName: "layouts_menu" */).then(m => m.default || m)
 
 }
 

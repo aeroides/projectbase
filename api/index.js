@@ -20,27 +20,23 @@ router.use((req, res, next) => {
 // Add POST - /api/login
 router.post('/login', (req, res) => {
   axios.post('', {
-    type: req.body.type,
     username: req.body.username,
     password: req.body.password
   }).then(result => {
+    console.log(123444)
     if (result.data.code === 0) {
       console.log('----------- 验证成功: 0 ----------')
       console.log(JSON.stringify(result.data))
       console.log('----------- 验证成功: 0 ----------')
       req.session.authUser = {
-        id: result.data.data.user_id,
         token: result.data.data.token,
-        cart: result.data.data.cart_info,
         username: req.body.username
       }
       return res.json({
         code: result.data.code,
         info: result.data.info,
         data: {
-          id: result.data.data.user_id,
           token: result.data.data.token,
-          cart: result.data.data.cart_info,
           username: req.body.username
         }
       })
@@ -68,7 +64,7 @@ router.post('/login', (req, res) => {
 // Add POST - /api/logout
 router.post('/logout', (req, res) => {
   axios.post('', {
-    user_id: req.body.user_id,
+    user_id: req.body.username,
     token: req.body.token
   }).then(result => {
     if (result.data.code === 0) {

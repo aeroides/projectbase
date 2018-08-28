@@ -1,12 +1,16 @@
 import axios from 'axios'
+
 const service = axios.create({
-  // baseURL: 'http://locahost:3000/api/'
+  baseURL: 'http://172.29.52.2:8100/api/'
 })
 
 const request = axios.create()
 
 // 拦截器
 service.interceptors.request.use(config => {
+  if (sessionStorage.token) {
+    config.headers['x-access-token'] = sessionStorage.token
+  }
   return config
 }, error => {
   return Promise.reject(error)

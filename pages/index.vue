@@ -44,22 +44,21 @@ export default {
             username: this.loginForm.username,
             password: this.loginForm.password
           }).then(res => {
-            console.log(res)
             if (this.$store.state.authUser !== null) {
-              this.$router.replace('/table')
+              this.$router.replace('/table/ksincome')
             }
             if (this.$store.state.loginInfo !== null) {
               let msg = this.$store.state.loginInfo
               this.$notify({
-                title: '警告',
+                title: '警告1',
                 message: `${msg}`,
                 type: 'error'
               })
             }
           }).catch(err => {
             this.$notify({
-              title: '警告',
-              message: `${err.info}`,
+              title: '警告2',
+              message: `${err.message}`,
               type: 'error'
             })
           })
@@ -69,3 +68,8 @@ export default {
   }
 }
 </script>
+<style>
+.el-checkbox{
+  margin-bottom: 22px;
+}
+</style>

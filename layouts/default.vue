@@ -20,6 +20,9 @@ export default {
 }
 </script>
 <style>
+  body{
+    font-family: "微软雅黑";
+  }
   .el-header {
     background-color: #B3C0D1;
     color: #333;

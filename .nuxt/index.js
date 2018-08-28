@@ -5,14 +5,14 @@ import { createRouter } from './router.js'
 import NoSSR from './components/no-ssr.js'
 import NuxtChild from './components/nuxt-child.js'
 import NuxtLink from './components/nuxt-link.js'
-import NuxtError from '../layouts/error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData } from './utils'
 import { createStore } from './store.js'
 
 /* Plugins */
-import nuxt_plugin_ElementUI_504a388c from 'nuxt_plugin_ElementUI_504a388c' // Source: ../plugins/ElementUI
+import nuxt_plugin_ElementUI_504a388c from 'nuxt_plugin_ElementUI_504a388c' // Source: ..\\plugins\\ElementUI
 
 
 // Component: <no-ssr>

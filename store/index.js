@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+axios.defaults.baseURL = 'http://172.29.52.2:8100/api/'
+let Base64 = require('js-base64').Base64
+
 export const state = () => ({
   authUser: null,
   loginInfo: null
@@ -12,41 +15,47 @@ export const mutations = {
   },
   LOGIN_INFO: (state, err) => {
     state.loginInfo = err
+  },
+  SET_TOKEN: (state, token) => {
+    sessionStorage.token = token
+  },
+  DEL_TOKEN: (state) => {
+    sessionStorage.removeItem('token')
   }
 }
 
 export const actions = {
   // nuxtServerInit is called by Nuxt.js before server-rendering every page
   nuxtServerInit ({ commit }, { req }) {
+    console.log(req.session.authUser)
     if (req.session && req.session.authUser) {
       commit('SET_USER', req.session.authUser)
+      commit('SET_TOKEN', req.session.authUser.token)
     }
   },
 
-  async login ({ commit }, { username, password }) {
+  async login ({ commit }, { username, password, token }) {
+    password = Base64.encode(password)
+    let params = { username, password, token }
     try {
-      // const { data } = await axios.post('/api/login', { username, password, type })
-      const { data } = await axios.get('http://localhost:3000/user.json', { username, password })
-      alert(data.code)
-      if (data.code === 0) {
-        commit('SET_USER', data.data)
+      const { data } = await axios.post('login', params)
+      let user = {
+        token: data.token,
+        username: username
       }
-      if (data.code !== 0) {
-        // handle error
-        commit('LOGIN_INFO', data.info)
-      }
+      commit('SET_USER', user)
+      commit('SET_TOKEN', data.token)
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')
       }
-      throw error
+      console.log(error.response)
+      throw error.response.data
     }
   },
 
   async logout ({ commit }, { username, token }) {
-    const { data } = await axios.post('/api/logout', { username, token })
-    if (data.ok) {
-      commit('SET_USER', null)
-    }
+    commit('SET_USER', null)
+    commit('DEL_TOKEN')
   }
 }

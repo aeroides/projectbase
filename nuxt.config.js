@@ -17,7 +17,7 @@ module.exports = {
   // 进度条
   loading: { color: '#3B8070' },
   router: {
-    //middleware: "auth",
+    middleware: "auth",
   },
 
   // 插件

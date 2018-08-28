@@ -1,20 +1,9 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="8">
-        <el-input placeholder="科室名称" prefix-icon="el-icon-search" v-model="keyword"></el-input>
-      </el-col>
-      <el-col :span="8">
-        <el-date-picker v-model="startMonth" type="month" placeholder="选择月份区间"></el-date-picker>
-      </el-col>
-      <el-col :span="8" style="text-align: right;">
-        <el-button type="primary" icon="el-icon-search">搜索</el-button>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="8" style="text-align: left;">
-        <el-button type="success" @click="exportExcel">导出数据</el-button>
-      </el-col>
+    <el-row type="flex" :gutter="20">
+      <el-date-picker v-model="month" type="month" :picker-options="pickerMonthBefore" placeholder="选择月份区间" style="margin-right:10px;"></el-date-picker>
+      <el-button type="primary" icon="el-icon-search" @click="getData">搜索</el-button>
+      <el-button type="success" @click="exportExcel">导出数据</el-button>
     </el-row>
     <div id="exceldata">
       <el-table :data="list" stripe show-summary style="width: 100%">
@@ -23,7 +12,7 @@
         <el-table-column prop="MZINCOME" label="科室总收入">
           <el-table-column
             prop="MZINCOME"
-            label="2018年6月累计">
+            :label="labName">
             <template slot-scope="scope">
               <span>{{scope.row.MZINCOME + scope.row.ZYINCOME + scope.row.YPINCOME + scope.row.HCINCOME}}</span>
             </template>
@@ -32,25 +21,25 @@
         <el-table-column prop="MZINCOME" label="其中：门诊总收入">
           <el-table-column
             prop="MZINCOME"
-            label="2018年6月累计">
+            :label="labName">
           </el-table-column>
         </el-table-column>
         <el-table-column prop="ZYINCOME" label="其中：住院总收入">
           <el-table-column
             prop="ZYINCOME"
-            label="2018年6月累计">
+            :label="labName">
           </el-table-column>
         </el-table-column>
         <el-table-column prop="YPINCOME" label="其中：药品总收入">
           <el-table-column
             prop="YPINCOME"
-            label="2018年6月累计">
+            :label="labName">
           </el-table-column>
         </el-table-column>
         <el-table-column prop="HCINCOME" label="其中：耗材总收入">
           <el-table-column
             prop="HCINCOME"
-            label="2018年6月累计">
+            :label="labName">
           </el-table-column>
         </el-table-column>
       </el-table>
@@ -65,14 +54,21 @@ import XLSX from 'xlsx'
 export default {
   data () {
     return {
+      pickerMonthBefore: {
+        disabledDate (time) {
+          return time.getTime() > Date.now()
+        }
+      },
       list: [],
-      keyword: '',
-      startMonth: ''
+      month: ''
     }
   },
   methods: {
+    asyncData ({ params }) {
+      console.log(params)
+    },
     getData () {
-      service.get('http://localhost:3000/deptincome.json').then(response => {
+      service.get('deptincome', { month: this.month }).then(response => {
         this.list = response.data
       })
     },
@@ -93,15 +89,35 @@ export default {
         }
       }
       return wbout
+    },
+    getCmonth: function () {
+      let date = new Date()
+      let year = date.getFullYear()
+      if (date.getMonth() < 9) {
+        this.month = year + '-0' + (date.getMonth() + 1)
+      } else {
+        this.month = year + '-' + (date.getMonth() + 1)
+      }
     }
   },
   mounted () {
+    this.getCmonth()
     this.getData()
+  },
+  computed: {
+    labName: function () {
+      let date = new Date(this.month)
+      let name = date.getFullYear() + '年' + (date.getMonth() + 1) + '月累计'
+      return name
+    }
   }
 }
 </script>
 <style>
 .el-row {
   margin-bottom: 20px;
+}
+.el-table__footer-wrapper{
+  font-weight: 600;
 }
 </style>

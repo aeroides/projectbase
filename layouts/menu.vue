@@ -12,8 +12,20 @@
             <i class="el-icon-location"></i>
             <span>财务报表</span>
           </template>
-          <el-menu-item index="table">
-            财务月报表
+          <el-menu-item index="table/ksincome">
+            2.3 科室收入
+          </el-menu-item>
+          <el-menu-item index="table/employee">
+            2.3.1 人员报表
+          </el-menu-item>
+          <el-menu-item index="table/hospital">
+            3.3.1 武钢
+          </el-menu-item>
+          <el-menu-item index="table/ksincome_month">
+            3.3.2 科室收入月报
+          </el-menu-item>
+          <el-menu-item index="table/workload">
+            3.3.3 科室收入及工作量报表
           </el-menu-item>
         </el-submenu>
       </el-menu>
