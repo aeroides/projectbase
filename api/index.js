@@ -19,7 +19,7 @@ router.use((req, res, next) => {
 
 // Add POST - /api/login
 router.post('/login', (req, res) => {
-  axios.post('http://172.29.52.2:8100/api/login', {
+  axios.post('http://127.0.0.1:8100/api/login', {
     username: req.body.username,
     password: req.body.password
   }).then(result => {

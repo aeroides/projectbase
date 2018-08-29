@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL: 'http://172.29.52.2:8100/api/'
+  baseURL: 'http://127.0.0.1:8100/api/'
 })
 
 const request = axios.create()
