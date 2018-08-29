@@ -45,7 +45,7 @@ export default {
             password: this.loginForm.password
           }).then(res => {
             if (this.$store.state.authUser !== null) {
-              this.$router.replace('/table/ksincome')
+              this.$router.replace('/table/ksstatic')
             }
             if (this.$store.state.loginInfo !== null) {
               let msg = this.$store.state.loginInfo

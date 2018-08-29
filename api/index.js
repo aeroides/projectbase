@@ -19,61 +19,32 @@ router.use((req, res, next) => {
 
 // Add POST - /api/login
 router.post('/login', (req, res) => {
-  axios.post('', {
+  axios.post('http://172.29.52.2:8100/api/login', {
     username: req.body.username,
     password: req.body.password
   }).then(result => {
-    console.log(123444)
-    if (result.data.code === 0) {
-      console.log('----------- 验证成功: 0 ----------')
-      console.log(JSON.stringify(result.data))
-      console.log('----------- 验证成功: 0 ----------')
-      req.session.authUser = {
-        token: result.data.data.token,
-        username: req.body.username
-      }
-      return res.json({
-        code: result.data.code,
-        info: result.data.info,
-        data: {
-          token: result.data.data.token,
-          username: req.body.username
-        }
-      })
+    console.log('----------- 验证成功: 1 ----------')
+    console.log(JSON.stringify(result.data))
+    console.log('----------- 验证成功: 1 ----------')
+    console.log(result)
+    req.session.authUser = {
+      token: result.data.token,
+      username: req.body.username
     }
-    if (result.data.code !== 0) {
-      console.log('----------- 验证失败: 0 ----------')
-      console.log(JSON.stringify(result.data))
-      console.log('----------- 验证失败: 0 ----------')
-      return res.json({
-        code: result.data.code,
-        info: result.data.info,
-        data: {}
-      })
-    }
+    return res.json({
+      token: result.data.token,
+      username: req.body.username
+    })
   }).catch(err => {
     console.log(err) // eslint-disable-line no-console
-    return res.status(200).json({
-      code: 1,
-      info: '用户名或密码不正确',
-      data: {}
-    })
+    return res.status(200).json({})
   })
 })
 
 // Add POST - /api/logout
 router.post('/logout', (req, res) => {
-  axios.post('', {
-    user_id: req.body.username,
-    token: req.body.token
-  }).then(result => {
-    if (result.data.code === 0) {
-      delete req.session.authUser
-      return res.json({ ok: true })
-    }
-  }).catch(err => {
-    console.log(err) // eslint-disable-line no-console
-  })
+  delete req.session.authUser
+  return res.status(200).json({})
 })
 
 // Export the server middleware

@@ -6,7 +6,7 @@ Vue.use(Router)
 const _ea80b4ae = () => import('..\\pages\\table\\workload.vue' /* webpackChunkName: "pages_table_workload" */).then(m => m.default || m)
 const _5ca50540 = () => import('..\\pages\\table\\employee.vue' /* webpackChunkName: "pages_table_employee" */).then(m => m.default || m)
 const _7b7a2228 = () => import('..\\pages\\table\\hospital.vue' /* webpackChunkName: "pages_table_hospital" */).then(m => m.default || m)
-const _15d4ae43 = () => import('..\\pages\\table\\ksincome.vue' /* webpackChunkName: "pages_table_ksincome" */).then(m => m.default || m)
+const _4c1af088 = () => import('..\\pages\\table\\ksstatic.vue' /* webpackChunkName: "pages_table_ksstatic" */).then(m => m.default || m)
 const _7f95df04 = () => import('..\\pages\\table\\ksincome_month.vue' /* webpackChunkName: "pages_table_ksincome_month" */).then(m => m.default || m)
 const _3bcf75b6 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
 
@@ -84,9 +84,9 @@ export function createRouter () {
 			name: "table-hospital"
 		},
 		{
-			path: "/table/ksincome",
-			component: _15d4ae43,
-			name: "table-ksincome"
+			path: "/table/ksstatic",
+			component: _4c1af088,
+			name: "table-ksstatic"
 		},
 		{
 			path: "/table/ksincome:month?",

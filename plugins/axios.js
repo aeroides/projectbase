@@ -8,9 +8,9 @@ const request = axios.create()
 
 // 拦截器
 service.interceptors.request.use(config => {
-  if (sessionStorage.token) {
-    config.headers['x-access-token'] = sessionStorage.token
-  }
+  // if (this.$store.state.authUser) {
+  //   config.headers['x-access-token'] = this.$store.state.authUser.token
+  // }
   return config
 }, error => {
   return Promise.reject(error)

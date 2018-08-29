@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-// import { service } from '~/plugins/axios'
+import { service } from '~/plugins/axios'
 import FileSaver from 'file-saver'
 import XLSX from 'xlsx'
 
@@ -63,13 +63,10 @@ export default {
     }
   },
   methods: {
-    asyncData ({ params }) {
-      console.log(params)
-    },
     getData () {
-    //   service.get('deptincome', { month: this.month }).then(response => {
-    //     this.list = response.data
-    //   })
+      service.get('deptincome', { month: this.month }).then(response => {
+        this.list = response.data
+      })
     },
     indexMethod (index) {
       return ++index

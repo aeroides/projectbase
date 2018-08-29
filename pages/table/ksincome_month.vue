@@ -68,7 +68,8 @@ export default {
       console.log(params)
     },
     getData () {
-      service.get('deptincome', { month: this.month }).then(response => {
+      let url = `deptincome/${this.month}`
+      service.get(url).then(response => {
         this.list = response.data
       })
     },
@@ -93,17 +94,16 @@ export default {
     getCmonth: function () {
       let date = new Date()
       let year = date.getFullYear()
-      if (date.getMonth() < 9) {
-        this.month = year + '-0' + (date.getMonth() + 1)
+      if (date.getMonth() < 10) {
+        this.month = year + '-0' + (date.getMonth())
       } else {
-        this.month = year + '-' + (date.getMonth() + 1)
+        this.month = year + '-' + (date.getMonth())
       }
     }
   },
   mounted () {
     this.getCmonth()
     this.getData()
-    console.log(this.$store.state.authUser)
   },
   computed: {
     labName: function () {

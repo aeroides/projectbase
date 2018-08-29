@@ -2,7 +2,7 @@
   <el-row class="tac" width="100%">
     <el-col>
       <el-menu
-        default-active="ksincome"
+        default-active="ksstatic"
         :router="true"
         class="el-menu-vertical-demo"
         background-color="#545c64"
@@ -15,8 +15,8 @@
             <i class="el-icon-location"></i>
             <span>财务报表</span>
           </template>
-          <el-menu-item index="ksincome">
-            2.3 科室收入
+          <el-menu-item index="ksstatic">
+            2.3 科室汇总
           </el-menu-item>
           <el-menu-item index="employee">
             2.3.1 人员报表
